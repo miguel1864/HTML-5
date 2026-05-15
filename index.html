@@ -3,52 +3,462 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actividad HTML - Unidad 2</title>
+    <title>TechCare Solutions - Mantenimiento de Computadores</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background-color: #f2f4f8;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        .container{
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        header{
+            background: linear-gradient(to right, #0a2e55, #0f4c81);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        header h1{
+            font-size: 2.6rem;
+            margin-bottom: 10px;
+        }
+
+        header p{
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        nav{
+            background-color: #081f38;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav .nav-content{
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        nav a{
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 8px 14px;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        nav a:hover{
+            background-color: #0f4c81;
+        }
+
+        .card{
+            background-color: white;
+            margin: 25px 0;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .card h2{
+            color: #0a2e55;
+            margin-bottom: 10px;
+        }
+
+        .card h3{
+            margin-top: 15px;
+            margin-bottom: 10px;
+            color: #0f4c81;
+        }
+
+        .card p{
+            margin-bottom: 15px;
+        }
+
+        .galeria{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .galeria img{
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 3px solid #e6e6e6;
+            transition: 0.3s;
+        }
+
+        .galeria img:hover{
+            transform: scale(1.03);
+        }
+
+        table{
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        thead{
+            background-color: #0a2e55;
+            color: white;
+        }
+
+        th, td{
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        tbody tr:nth-child(even){
+            background-color: #f7f7f7;
+        }
+
+        tbody tr:hover{
+            background-color: #eaf3ff;
+        }
+
+        .info-box{
+            background-color: #eaf3ff;
+            padding: 15px;
+            border-left: 6px solid #0f4c81;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .info-box ul{
+            padding-left: 20px;
+        }
+
+        .info-box li{
+            margin: 8px 0;
+        }
+
+        .video{
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        iframe{
+            width: 100%;
+            max-width: 720px;
+            height: 400px;
+            border-radius: 12px;
+        }
+
+        .btn-link{
+            display: inline-block;
+            text-decoration: none;
+            background-color: #0f4c81;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-link:hover{
+            background-color: #0a2e55;
+        }
+
+        form{
+            margin-top: 20px;
+        }
+
+        .form-group{
+            margin-bottom: 15px;
+        }
+
+        label{
+            font-weight: bold;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        input, select, textarea{
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #bbb;
+            outline: none;
+        }
+
+        input:focus, select:focus, textarea:focus{
+            border: 2px solid #0f4c81;
+        }
+
+        textarea{
+            resize: none;
+            height: 120px;
+        }
+
+        button{
+            background-color: #0a2e55;
+            color: white;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover{
+            background-color: #0f4c81;
+        }
+
+        footer{
+            background-color: #081f38;
+            color: white;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 30px;
+        }
+
+        footer p{
+            margin: 6px 0;
+        }
+    </style>
 </head>
+
 <body>
 
-    <h1>HTML5: Etiquetas de Texto y Enlaces</h1>
+    <header id="inicio">
+        <div class="container">
+            <h1>TechCare Solutions</h1>
+            <p>Servicio profesional de mantenimiento preventivo y correctivo de computadores</p>
+        </div>
+    </header>
 
-    <p>
-        HTML5 es la base de cualquier página web y es lo primero que uno debe aprender si quiere meterse en este mundo.
-        Con sus etiquetas puedo organizar la información para que se vea clara y bien presentada.
-        Me gusta porque es sencillo de entender, pero al mismo tiempo es muy importante para crear sitios profesionales.
-        Cada vez que practico, siento que voy mejorando y entendiendo cómo se construyen las páginas que usamos todos los días.
-        Aprender HTML5 es como abrir la puerta al desarrollo web y empezar a crear cosas reales.
-    </p>
+    <nav>
+        <div class="container nav-content">
+            <a href="#inicio">Inicio</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#beneficios">Beneficios</a>
+            <a href="#multimedia">Multimedia</a>
+            <a href="#contacto">Contacto</a>
+        </div>
+    </nav>
 
-    <strong>HTML5 permite organizar mejor el contenido de una página web.</strong>
+    <main class="container">
 
-    <br><br>
+        <section id="descripcion" class="card">
+            <h2>Descripción general</h2>
+            <p>
+                TechCare Solutions es un servicio técnico especializado en el mantenimiento de computadores,
+                enfocado en la prevención de fallas, optimización del rendimiento y reparación profesional
+                de equipos de escritorio y portátiles. Nuestro objetivo es garantizar el correcto
+                funcionamiento de los equipos, aumentando su vida útil y mejorando su seguridad informática.
+            </p>
+        </section>
 
-    <em>Practicar HTML es esencial para mejorar en el desarrollo web.</em>
+        <section id="imagenes" class="card">
+            <h2>Galería de mantenimiento</h2>
+            <p>Algunas actividades relacionadas con nuestro servicio técnico:</p>
 
-    <hr>
+            <div class="galeria">
+                <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=900&q=80"
+                    alt="Mantenimiento preventivo de computador">
 
-    <h2>Enlaces</h2>
+                <img src="https://images.unsplash.com/photo-1588702547923-7093a6c3ba33?auto=format&fit=crop&w=900&q=80"
+                    alt="Reparación de laptop en servicio técnico">
 
-    <a href="https://www.google.com" target="_blank">Ir a Google</a>
+                <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=900&q=80"
+                    alt="Seguridad informática y protección del sistema">
+            </div>
+        </section>
 
-    <br><br>
+        <section id="servicios" class="card">
+            <h2>Servicios disponibles</h2>
+            <p>
+                Ofrecemos servicios técnicos confiables para estudiantes, hogares y empresas.
+                A continuación se presentan los principales servicios:
+            </p>
 
-    <a href="https://www.youtube.com" target="_blank">Ir a YouTube</a>
+            <article>
+                <h3>Tabla de servicios (mínimo 5)</h3>
 
-    <br><br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Servicio</th>
+                            <th>Descripción</th>
+                            <th>Tiempo estimado</th>
+                            <th>Valor aproximado</th>
+                        </tr>
+                    </thead>
 
-    <a href="https://revistas.ufps.edu.co/index.php/ingenio/article/download/2057/2007/36077" target="_blank">
-        Ir a Revista Ingenio
-    </a>
+                    <tbody>
+                        <tr>
+                            <td>Mantenimiento preventivo</td>
+                            <td>Limpieza interna, cambio de pasta térmica y revisión general.</td>
+                            <td>1 - 2 horas</td>
+                            <td>$80.000 COP</td>
+                        </tr>
 
-    <hr>
+                        <tr>
+                            <td>Optimización de sistema</td>
+                            <td>Eliminación de archivos basura, mejora de rendimiento y arranque.</td>
+                            <td>1 hora</td>
+                            <td>$60.000 COP</td>
+                        </tr>
 
-    <h2>Organización con div y span</h2>
+                        <tr>
+                            <td>Instalación de software</td>
+                            <td>Instalación de programas básicos, drivers y paquetes universitarios.</td>
+                            <td>30 min - 1 hora</td>
+                            <td>$50.000 COP</td>
+                        </tr>
 
-    <div>
-        <p>
-            Este texto está dentro de un div, que es un contenedor en bloque.
-            <span>Y este texto está dentro de un span, que es un contenedor en línea.</span>
-        </p>
-    </div>
+                        <tr>
+                            <td>Eliminación de virus</td>
+                            <td>Análisis completo y limpieza de malware con protección avanzada.</td>
+                            <td>1 - 3 horas</td>
+                            <td>$90.000 COP</td>
+                        </tr>
+
+                        <tr>
+                            <td>Reparación de fallas</td>
+                            <td>Diagnóstico y reparación de hardware/software (según el caso).</td>
+                            <td>2 - 5 horas</td>
+                            <td>$120.000 COP</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+        </section>
+
+        <section id="beneficios" class="card">
+            <h2>Beneficios del mantenimiento</h2>
+
+            <article>
+                <h3>¿Por qué es importante?</h3>
+                <p>
+                    Un computador sin mantenimiento suele presentar lentitud, sobrecalentamiento, fallos del sistema,
+                    virus y daños en componentes internos. Con un mantenimiento periódico se mejora el rendimiento y
+                    se evitan costos altos por reparaciones futuras.
+                </p>
+            </article>
+
+            <aside class="info-box">
+                <h3>Recomendaciones para usuarios</h3>
+                <ul>
+                    <li>Evitar instalar programas desconocidos.</li>
+                    <li>Realizar limpieza física cada 3 o 6 meses.</li>
+                    <li>Usar antivirus actualizado.</li>
+                    <li>Evitar el sobrecalentamiento (usar base refrigerante).</li>
+                    <li>Respaldar archivos importantes en la nube o disco externo.</li>
+                </ul>
+            </aside>
+        </section>
+
+        <section id="multimedia" class="card">
+            <h2>Multimedia (Video obligatorio)</h2>
+            <p>
+                Este video explica un mantenimiento preventivo básico para computadores:
+            </p>
+
+            <div class="video">
+                <iframe width="560" height="315"
+                    src="https://www.youtube.com/embed/SRFvGeLt18I"
+                    title="Video de mantenimiento de computadores"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <p>
+                También puedes ver este tutorial externo directamente en YouTube:
+            </p>
+
+            <a class="btn-link" href="https://youtu.be/SRFvGeLt18I?list=PLZxz8Tv7Em0I5HyfOyqlmnyQRQiu9FmN6" target="_blank">
+                Ver tutorial completo en YouTube
+            </a>
+        </section>
+
+        <section id="contacto" class="card">
+            <h2>Formulario de contacto (mínimo 6 campos)</h2>
+            <p>
+                Completa el siguiente formulario para solicitar tu servicio técnico.
+            </p>
+
+            <form action="#" method="post">
+
+                <div class="form-group">
+                    <label for="nombre">Nombre completo:</label>
+                    <input type="text" id="nombre" name="nombre" required minlength="3" maxlength="40">
+                </div>
+
+                <div class="form-group">
+                    <label for="correo">Correo electrónico:</label>
+                    <input type="email" id="correo" name="correo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="tipoEquipo">Tipo de equipo:</label>
+                    <select id="tipoEquipo" name="tipoEquipo" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="pc">PC de escritorio</option>
+                        <option value="laptop">Laptop</option>
+                        <option value="allinone">All in One</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="tipoFalla">Tipo de falla:</label>
+                    <input type="text" id="tipoFalla" name="tipoFalla" required minlength="5" maxlength="60">
+                </div>
+
+                <div class="form-group">
+                    <label for="urgencia">Nivel de urgencia (1 a 5):</label>
+                    <input type="number" id="urgencia" name="urgencia" required min="1" max="5">
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcion">Descripción del problema:</label>
+                    <textarea id="descripcion" name="descripcion" required minlength="10" maxlength="250"></textarea>
+                </div>
+
+                <button type="submit">Enviar solicitud</button>
+
+            </form>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p><strong>TechCare Solutions</strong> - Servicio técnico profesional</p>
+            <p>Ocaña, Norte de Santander - Colombia</p>
+            <p>Contacto: techcare.solutions@email.com | Tel: +57 300 123 4567</p>
+            <p>&copy; 2026 - Todos los derechos reservados</p>
+        </div>
+    </footer>
 
 </body>
 </html>
