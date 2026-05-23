@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portafolio | Juan Miguel Pino Flórez</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
+    body{
+      font-family:'Poppins',sans-serif;
+      background:#050816;
+      color:white;
+      overflow-x:hidden;
+      background-image:
+        radial-gradient(circle at top left, rgba(0,255,255,.15), transparent 25%),
+        radial-gradient(circle at bottom right, rgba(140,0,255,.2), transparent 25%);
+    }
+    ::selection{background:#00e5ff;color:black;}
+    ::-webkit-scrollbar{width:10px;}
+    ::-webkit-scrollbar-track{background:#0b1022;}
+    ::-webkit-scrollbar-thumb{background:linear-gradient(#00e5ff,#8a2be2);border-radius:10px;}
+
+    /* NAVBAR */
+    nav{
+      position:fixed;width:100%;top:0;z-index:999;
+      padding:20px 8%;
+      backdrop-filter:blur(10px);
+      background:rgba(10,10,20,.4);
+      border-bottom:1px solid rgba(255,255,255,.1);
+    }
+    nav ul{display:flex;justify-content:center;gap:40px;list-style:none;flex-wrap:wrap;}
+    nav a{color:white;text-decoration:none;font-weight:500;transition:.3s;position:relative;}
+    nav a:hover{color:#00e5ff;}
+    nav a::after{content:"";position:absolute;left:0;bottom:-5px;width:0%;height:2px;background:#00e5ff;transition:.3s;}
+    nav a:hover::after{width:100%;}
+
+    /* HERO */
+    .hero{min-height:100vh;display:flex;justify-content:center;align-items:center;padding:120px 6% 60px;}
+    .hero-container{width:100%;max-width:1100px;animation:fadeUp 1s ease;}
+    .glass{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(15px);border-radius:25px;box-shadow:0 0 25px rgba(0,229,255,.1);}
+
+    /* TARJETA UNIFICADA */
+    .hero-card{padding:40px;}
+    .hero-top{display:flex;justify-content:center;margin-bottom:36px;}
+
+    /* FOTO */
+    .hero-right{display:flex;justify-content:center;align-items:center;animation:float 4s ease-in-out infinite;}
+    .profile-container{
+      position:relative;width:200px;height:200px;border-radius:50%;padding:6px;
+      background:linear-gradient(45deg,#00e5ff,#8a2be2);
+      box-shadow:0 0 20px #00e5ff,0 0 50px #8a2be2,0 0 90px rgba(0,229,255,.5);
+    }
+    .profile-container img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:5px solid #050816;}
+
+    /* DOS COLUMNAS */
+    .hero-bottom{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:40px;
+      align-items:start;
+      border-top:1px solid rgba(255,255,255,.08);
+      padding-top:32px;
+    }
+    .hero-name-block{text-align:left;}
+    .hero-name-block h1{font-family:'Orbitron',sans-serif;font-size:1.9rem;line-height:1.2;margin-bottom:10px;}
+    .hero-name-block h1 span{color:#00e5ff;text-shadow:0 0 20px #00e5ff;}
+    .hero-bio-block{text-align:left;}
+    .codigo-badge{
+      display:inline-block;
+      background:rgba(0,229,255,.1);
+      border:1px solid rgba(0,229,255,.3);
+      border-radius:8px;
+      padding:4px 14px;
+      font-size:.82rem;
+      color:#00e5ff;
+      margin-bottom:16px;
+      letter-spacing:1px;
+    }
+    .typing{color:#00e5ff;font-weight:600;margin-bottom:14px;font-size:1rem;}
+    .hero-bio-block p{color:#cfcfcf;line-height:1.75;font-size:.88rem;margin-bottom:12px;}
+    .btns{display:flex;gap:16px;flex-wrap:wrap;margin-top:20px;}
+    .btn{padding:13px 26px;border:none;border-radius:15px;cursor:pointer;font-weight:600;transition:.4s;text-decoration:none;color:white;font-size:.9rem;}
+    .btn-primary{background:linear-gradient(45deg,#00e5ff,#8a2be2);box-shadow:0 0 20px rgba(0,229,255,.4);}
+    .btn-primary:hover{transform:translateY(-5px) scale(1.05);box-shadow:0 0 30px rgba(0,229,255,.8);}
+    .btn-secondary{border:1px solid #00e5ff;background:transparent;}
+    .btn-secondary:hover{background:#00e5ff;color:black;box-shadow:0 0 20px #00e5ff;}
+
+    /* SECCIONES */
+    section{padding:90px 8%;}
+    .title{font-size:2.5rem;margin-bottom:50px;text-align:center;font-family:'Orbitron',sans-serif;color:#00e5ff;text-shadow:0 0 15px rgba(0,229,255,.5);}
+
+    /* CARDS */
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;}
+    .card{padding:30px;transition:.4s;position:relative;overflow:hidden;}
+    .card::before{content:"";position:absolute;inset:0;background:linear-gradient(45deg,transparent,rgba(0,229,255,.08),transparent);transform:translateX(-100%);transition:.6s;}
+    .card:hover::before{transform:translateX(100%);}
+    .card:hover{transform:translateY(-10px);box-shadow:0 0 30px rgba(0,229,255,.2);}
+    .card i{font-size:2rem;margin-bottom:20px;color:#00e5ff;}
+    .card h3{margin-bottom:15px;font-size:1.3rem;}
+    .card p{color:#cfcfcf;line-height:1.7;}
+
+    /* COMPETENCIAS */
+    .competencias-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:24px;
+    }
+    .competencia-item{
+      display:flex;
+      align-items:flex-start;
+      gap:16px;
+      padding:22px 24px;
+      background:rgba(0,229,255,.04);
+      border:1px solid rgba(0,229,255,.12);
+      border-radius:18px;
+      transition:.3s;
+    }
+    .competencia-item:hover{
+      background:rgba(0,229,255,.09);
+      border-color:rgba(0,229,255,.3);
+      transform:translateY(-4px);
+      box-shadow:0 0 20px rgba(0,229,255,.15);
+    }
+    .competencia-item i{
+      font-size:1.5rem;
+      color:#00e5ff;
+      margin-top:2px;
+      flex-shrink:0;
+    }
+    .competencia-item h4{
+      font-size:.95rem;
+      margin-bottom:5px;
+      color:white;
+    }
+    .competencia-item p{
+      font-size:.82rem;
+      color:#aaa;
+      line-height:1.5;
+    }
+    .perfil-texto{
+      text-align:center;
+      max-width:750px;
+      margin:0 auto 40px;
+      color:#cfcfcf;
+      line-height:1.8;
+      font-size:.95rem;
+      font-style:italic;
+      border-left:3px solid #00e5ff;
+      padding-left:20px;
+      text-align:left;
+    }
+
+    /* HABILIDADES TÉCNICAS */
+    .skills-container{display:grid;gap:25px;}
+    .skill h4{margin-bottom:10px;}
+    .bar{width:100%;height:16px;background:#111827;border-radius:20px;overflow:hidden;}
+    .progress{height:100%;border-radius:20px;background:linear-gradient(90deg,#00e5ff,#8a2be2);box-shadow:0 0 15px #00e5ff;animation:load 2s ease;}
+
+    /* PROYECTOS */
+    .project-card img{width:100%;border-radius:15px;margin-bottom:20px;height:180px;object-fit:cover;}
+    .project-badge{
+      display:inline-block;
+      background:rgba(0,229,255,.15);
+      border:1px solid rgba(0,229,255,.3);
+      border-radius:20px;
+      padding:3px 12px;
+      font-size:.75rem;
+      color:#00e5ff;
+      margin-bottom:12px;
+      margin-right:6px;
+    }
+
+    /* CONTACTO */
+    .contact{text-align:center;}
+    .phone-box{
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      background:rgba(0,229,255,.08);
+      border:1px solid rgba(0,229,255,.25);
+      border-radius:15px;
+      padding:14px 28px;
+      margin-top:20px;
+      font-size:1.1rem;
+      color:#00e5ff;
+      letter-spacing:1px;
+    }
+    .phone-box i{font-size:1.3rem;}
+
+    .socials{margin-top:30px;display:flex;justify-content:center;gap:25px;flex-wrap:wrap;}
+    .social-item{display:flex;flex-direction:column;align-items:center;gap:8px;}
+    .social-item a{
+      width:60px;height:60px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      background:rgba(255,255,255,.05);color:#00e5ff;font-size:1.4rem;
+      transition:.4s;border:1px solid rgba(255,255,255,.1);
+      text-decoration:none;
+    }
+    .social-item a:hover{transform:translateY(-10px) scale(1.1);background:#00e5ff;color:black;box-shadow:0 0 25px #00e5ff;}
+    .social-label{
+      font-size:.72rem;
+      color:#aaa;
+      opacity:0;
+      transition:.3s;
+      transform:translateY(5px);
+    }
+    .social-item:hover .social-label{opacity:1;transform:translateY(0);color:#00e5ff;}
+
+    footer{padding:30px;text-align:center;color:#aaa;border-top:1px solid rgba(255,255,255,.1);margin-top:50px;}
+
+    /* ANIMACIONES */
+    @keyframes fadeUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes float{0%{transform:translateY(0px);}50%{transform:translateY(-15px);}100%{transform:translateY(0px);}}
+    @keyframes load{from{width:0;}}
+
+    /* RESPONSIVE */
+    @media(max-width:800px){
+      .hero-bottom{grid-template-columns:1fr;}
+      .hero-name-block,.hero-bio-block{text-align:center;}
+      .btns{justify-content:center;}
+      .profile-container{width:160px;height:160px;}
+      .hero-card{padding:24px 18px;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <ul>
+      <li><a href="#sobre">Sobre mí</a></li>
+      <li><a href="#habilidades">Perfil</a></li>
+      <li><a href="#habilidades-tecnicas">Habilidades</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#estudios">Estudios</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-container">
+
+      <!-- TARJETA ÚNICA QUE CONTIENE TODO -->
+      <div class="hero-card glass">
+
+        <!-- FOTO CENTRADA ARRIBA DENTRO DE LA TARJETA -->
+        <div class="hero-top">
+          <div class="hero-right">
+            <div class="profile-container">
+              <img src="image.png" alt="Juan Miguel Pino Flórez">
+            </div>
+          </div>
+        </div>
+
+        <!-- DOS COLUMNAS ABAJO DENTRO DE LA MISMA TARJETA -->
+        <div class="hero-bottom">
+
+          <!-- COLUMNA IZQUIERDA -->
+          <div class="hero-name-block">
+            <h1>Hola, soy<br><span>Juan Miguel<br>Pino Flórez</span></h1>
+            <div class="codigo-badge">Código: 0192778</div>
+            <div class="typing">> Future Software Engineer 🚀</div>
+            <div class="btns">
+              <a href="#" class="btn btn-primary">Descargar CV</a>
+              <a href="#contacto" class="btn btn-secondary">Contactar</a>
+            </div>
+          </div>
+
+          <!-- COLUMNA DERECHA -->
+          <div class="hero-bio-block">
+            <p>
+              Estudiante de Ingeniería de Sistemas con interés en el desarrollo web y la programación. Cuento con conocimientos básicos en Python, HTML y CSS, además del manejo de herramientas digitales como VS Code, Canva, Microsoft Word y Excel. Me caracterizo por ser una persona responsable, creativa, amigable y con gran disposición para aprender nuevas tecnologías.
+            </p>
+            <p>
+              Tengo interés en la creación de páginas web modernas, funcionales y profesionales. He desarrollado proyectos académicos básicos relacionados con diseño y estructura de sitios web, fortaleciendo habilidades en organización, lógica y creatividad.
+            </p>
+            <p>
+              Además, poseo certificado en contabilidad, lo que me ha permitido desarrollar capacidades de organización, disciplina y manejo de información. Busco seguir creciendo en el área tecnológica, aportando compromiso, aprendizaje constante y trabajo en equipo.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SOBRE MI -->
+  <section id="sobre">
+    <h2 class="title">Sobre Mí</h2>
+    <div class="cards">
+      <div class="card glass">
+        <i class="fa-solid fa-code"></i>
+        <h3>Desarrollo Web</h3>
+        <p>Diseño páginas modernas usando HTML, CSS y JavaScript con efectos visuales y estilo futurista.</p>
+      </div>
+      <div class="card glass">
+        <i class="fa-solid fa-gamepad"></i>
+        <h3>Estilo Gamer</h3>
+        <p>Me encanta crear interfaces neon, efectos glow, animaciones y experiencias visuales modernas.</p>
+      </div>
+      <div class="card glass">
+        <i class="fa-solid fa-microchip"></i>
+        <h3>Tecnología</h3>
+        <p>Apasionado por la programación, el software, el diseño UI y la innovación digital.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPETENCIAS -->
+  <section id="habilidades">
+    <h2 class="title">Perfil Profesional</h2>
+
+    <p class="perfil-texto">
+      Soy una persona honesta, ética y comprometida con mi formación profesional. Me destaco por mi seriedad en el trabajo, mi actitud responsable ante cada reto y mi constante disposición para aprender y mejorar. Considero que la disciplina, el respeto y la integridad son la base de cualquier entorno laboral exitoso.
+    </p>
+
+    <div class="competencias-grid">
+
+      <div class="competencia-item">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div>
+          <h4>Honestidad y Ética</h4>
+          <p>Actúo con transparencia e integridad en todas mis responsabilidades académicas y laborales.</p>
+        </div>
+      </div>
+
+      <div class="competencia-item">
+        <i class="fa-solid fa-briefcase"></i>
+        <div>
+          <h4>Seriedad Profesional</h4>
+          <p>Asumo cada tarea con compromiso y enfoque, cumpliendo plazos y entregando trabajo de calidad.</p>
+        </div>
+      </div>
+
+      <div class="competencia-item">
+        <i class="fa-solid fa-clock"></i>
+        <div>
+          <h4>Responsabilidad</h4>
+          <p>Respondo por mis obligaciones con puntualidad y dedicación, tanto en equipo como de forma individual.</p>
+        </div>
+      </div>
+
+      <div class="competencia-item">
+        <i class="fa-solid fa-book-open"></i>
+        <div>
+          <h4>Capacidad de Aprendizaje</h4>
+          <p>Soy estudioso y proactivo; busco constantemente ampliar mis conocimientos técnicos y personales.</p>
+        </div>
+      </div>
+
+      <div class="competencia-item">
+        <i class="fa-solid fa-people-group"></i>
+        <div>
+          <h4>Trabajo en Equipo</h4>
+          <p>Colaboro de manera efectiva con mis compañeros, aportando ideas y apoyando los objetivos comunes.</p>
+        </div>
+      </div>
+
+      <div class="competencia-item">
+        <i class="fa-solid fa-lightbulb"></i>
+        <div>
+          <h4>Creatividad e Iniciativa</h4>
+          <p>Propongo soluciones innovadoras y tomo la iniciativa para mejorar procesos y resultados.</p>
+        </div>
+      </div>
+
+      <div class="competencia-item">
+        <i class="fa-solid fa-comments"></i>
+        <div>
+          <h4>Comunicación Efectiva</h4>
+          <p>Me expreso con claridad y escucho activamente, facilitando la colaboración y el entendimiento.</p>
+        </div>
+      </div>
+
+      <div class="competencia-item">
+        <i class="fa-solid fa-chart-line"></i>
+        <div>
+          <h4>Orientación al Logro</h4>
+          <p>Establezco metas claras y trabajo con disciplina para alcanzarlas dentro de los tiempos establecidos.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HABILIDADES TÉCNICAS -->
+  <section id="habilidades-tecnicas">
+    <h2 class="title">Habilidades Técnicas</h2>
+    <div class="glass card">
+      <div class="skills-container">
+        <div class="skill">
+          <h4>HTML</h4>
+          <div class="bar"><div class="progress" style="width:60%"></div></div>
+        </div>
+        <div class="skill">
+          <h4>CSS</h4>
+          <div class="bar"><div class="progress" style="width:55%"></div></div>
+        </div>
+        <div class="skill">
+          <h4>Python</h4>
+          <div class="bar"><div class="progress" style="width:40%"></div></div>
+        </div>
+        <div class="skill">
+          <h4>Responsive Design</h4>
+          <div class="bar"><div class="progress" style="width:45%"></div></div>
+        </div>
+        <div class="skill">
+          <h4>VS Code</h4>
+          <div class="bar"><div class="progress" style="width:65%"></div></div>
+        </div>
+        <div class="skill">
+          <h4>Microsoft Excel / Word</h4>
+          <div class="bar"><div class="progress" style="width:70%"></div></div>
+        </div>
+        <div class="skill">
+          <h4>Canva</h4>
+          <div class="bar"><div class="progress" style="width:75%"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROYECTOS -->
+  <section id="proyectos">
+    <h2 class="title">Proyectos</h2>
+    <div class="cards">
+
+      <div class="card glass project-card">
+        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1000&auto=format&fit=crop" alt="Proyecto HTML">
+        <span class="project-badge">HTML & CSS</span>
+        <span class="project-badge">Semestre 1</span>
+        <h3>Mi Primera Página Web</h3>
+        <p>Página web estática creada como ejercicio académico. Incluye estructura básica en HTML y estilos con CSS aprendidos en clase.</p>
+      </div>
+
+      <div class="card glass project-card">
+        <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?q=80&w=1000&auto=format&fit=crop" alt="Python básico">
+        <span class="project-badge">Python</span>
+        <span class="project-badge">Semestre 2</span>
+        <h3>Ejercicios en Python</h3>
+        <p>Colección de ejercicios básicos realizados en Python: calculadoras simples, estructuras de control y manejo de variables.</p>
+      </div>
+
+      <div class="card glass project-card">
+        <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=1000&auto=format&fit=crop" alt="Portafolio">
+        <span class="project-badge">HTML & CSS</span>
+        <span class="project-badge">Semestre 2</span>
+        <h3>Este Portafolio</h3>
+        <p>Portafolio personal con diseño futurista, creado para presentar mis estudios, habilidades y proyectos académicos de forma profesional.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ESTUDIOS -->
+  <section id="estudios">
+    <h2 class="title">Estudios</h2>
+    <div class="cards">
+      <div class="card glass">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <h3>Ingeniería de Sistemas</h3>
+        <p>Universidad Republicana (URP) - Colombia. Actualmente en 2° semestre. Formación en programación, bases de datos y desarrollo de software.</p>
+      </div>
+      <div class="card glass">
+        <i class="fa-solid fa-laptop-code"></i>
+        <h3>Bachiller Académico</h3>
+        <p>Institución Educativa La Salle. Graduado en el año 2023.</p>
+      </div>
+      <div class="card glass">
+        <i class="fa-solid fa-calculator"></i>
+        <h3>Certificado en Contabilidad</h3>
+        <p>Formación complementaria que fortaleció habilidades de organización, disciplina y manejo de información.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <h2 class="title">Contacto</h2>
+    <div class="glass card contact">
+      <h3>Trabajemos juntos 🚀</h3>
+      <p style="margin-top:15px;color:#cfcfcf;">Puedes contactarme por redes sociales o directamente a mi número.</p>
+
+      <!-- TELÉFONO -->
+      <div class="phone-box">
+        <i class="fa-solid fa-phone"></i>
+        +57 311 511 3103
+      </div>
+
+      <!-- REDES SOCIALES -->
+      <div class="socials">
+
+        <div class="social-item">
+          <a href="#"><i class="fab fa-github"></i></a>
+          <span class="social-label">GitHub</span>
+        </div>
+
+        <div class="social-item">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <span class="social-label">Instagram</span>
+        </div>
+
+        <div class="social-item">
+          <a href="https://wa.me/573115113103" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+          <span class="social-label">WhatsApp</span>
+        </div>
+
+        <div class="social-item">
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <span class="social-label">LinkedIn</span>
+        </div>
+
+        <div class="social-item">
+          <a href="#"><i class="fab fa-discord"></i></a>
+          <span class="social-label">Discord</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 | Portafolio de Juan Miguel Pino Flórez 🚀
+  </footer>
+
+</body>
+</html>
